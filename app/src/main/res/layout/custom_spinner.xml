@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_input">
+
+    <TextView
+        android:id="@+id/classSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/btn_dropDown"
+        android:padding="10dp"
+        android:text="Chọn lớp học"
+        android:textColor="#39653B"
+        android:textSize="19sp" />
+    <ImageView
+        android:id="@+id/btn_dropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>

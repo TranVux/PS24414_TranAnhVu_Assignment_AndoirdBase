@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:layout_margin="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Thêm sinh viên"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="3dp"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:background="@drawable/background_header_dialog"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/background_input_field"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/input_ID"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/background_input"
+            android:hint="ID"
+            android:textColorHint="#AB39653B"
+            android:textColor="#39653B"
+            android:layout_marginBottom="20dp"
+            android:paddingLeft="10dp"/>
+        <EditText
+            android:id="@+id/input_studentName"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/background_input"
+            android:hint="Họ và tên"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="#AB39653B"
+            android:textColor="#39653B"
+            android:paddingLeft="10dp"/>
+        <EditText
+            android:id="@+id/input_birthDay"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/background_input"
+            android:hint="Sinh nhật (dd/mm/yyyy)"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="#AB39653B"
+            android:textColor="#39653B"
+            android:paddingLeft="10dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/choiceClass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="17dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:orientation="horizontal"
+            tools:ignore="RtlSymmetry">
+
+            <Button
+                android:id="@+id/btn_outAdd"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Thoát"
+                android:textColor="@color/teal_700"
+                android:background="@drawable/background_btn_out_remove"/>
+            <Button
+                android:id="@+id/btn_addSTDialog"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/background_btn_add"
+                android:text="Thêm"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
