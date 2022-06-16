@@ -17,7 +17,6 @@ import com.example.ps24414_assignmentgd1_trananhvu.SQLLite.ClassDAO;
 
 import java.util.ArrayList;
 
-
 public class MainActivity extends AppCompatActivity {
     final int RESULT_UPDATE_CLASS = 753;
     final int RESULT_DELETE_CLASS = 951;
@@ -75,23 +74,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 888) {
-            if (resultCode == RESULT_ADD_CLASS) {
-                listClass = db.getListClass();
-            }
-            if (resultCode == RESULT_UPDATE_CLASS) {
+            if (resultCode == RESULT_ADD_CLASS || resultCode == RESULT_UPDATE_CLASS) {
                 listClass = db.getListClass();
             }
             if (resultCode == RESULT_DELETE_CLASS) {
                 listClass = db.getListClass();
+                listSt = db.getListStudent();
             }
         } else if (requestCode == 999) {
-            if (resultCode == RESULT_ADD_STUDENT){
-                listSt = db.getListStudent();
-            }
-            if(resultCode == RESULT_UPDATE_STUDENT){
-                listSt = db.getListStudent();
-            }
-            if(resultCode == RESULT_DELETE_STUDENT){
+            if (resultCode == RESULT_ADD_STUDENT || resultCode == RESULT_DELETE_STUDENT || resultCode == RESULT_UPDATE_STUDENT){
                 listSt = db.getListStudent();
             }
         }

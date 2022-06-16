@@ -53,8 +53,8 @@ public class Studentmanagement extends AppCompatActivity {
         setContentView(R.layout.studentmanagement);
         listStudent = findViewById(R.id.listStudent_new);
         btnAdd = findViewById(R.id.btn_addST);
-        listSt = (ArrayList<Student>) getIntent().getExtras().get("listStudent");
-        listClass = (ArrayList<ClassSt>) getIntent().getExtras().get("listClass");
+//        listSt = (ArrayList<Student>) getIntent().getExtras().get("listStudent");
+//        listClass = (ArrayList<ClassSt>) getIntent().getExtras().get("listClass");
         db = new ClassDAO(Studentmanagement.this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Studentmanagement.this);
         listStudent.setLayoutManager(linearLayoutManager);
@@ -68,6 +68,8 @@ public class Studentmanagement extends AppCompatActivity {
     }
 
     public void setupRecycleView() {
+        listSt = db.getListStudent();
+        listClass = db.getListClass();
         adapter = new stAdapter(listSt, new onItemClickedInterface() {
             @Override
             public void onItemClick(Student student) {
@@ -82,6 +84,7 @@ public class Studentmanagement extends AppCompatActivity {
         Bundle newBundle = new Bundle();
         newBundle.putSerializable("ObjectStudent", student);
         newBundle.putInt("indexOfStudent", listSt.indexOf(student));
+//        newBundle.putInt("indexOfClass", listClass.indexOf());
         showDetail.putExtra("listClass", listClass);
         showDetail.putExtras(newBundle);
         startActivityForResult(showDetail, 123);
@@ -156,12 +159,12 @@ public class Studentmanagement extends AppCompatActivity {
                 if (!check(inputID, inputBirthday)) return;
                 Student newStudent = new Student(inputID.getText().toString(), inputName.getText().toString(), inputBirthday.getText().toString(), currentClass[0].getId());
                 Toast.makeText(Studentmanagement.this, "Thêm sinh viên thành công", Toast.LENGTH_SHORT).show();
-                listSt.add(newStudent);
-                setupRecycleView();
-                dialogAddStudent.dismiss();
+//                listSt.add(newStudent);
                 db.AddStudent(newStudent);
+                setupRecycleView();
                 Intent data = new Intent();
                 setResult(RESULT_ADD_STUDENT, data);
+                dialogAddStudent.dismiss();
             }
         });
 
@@ -212,7 +215,7 @@ public class Studentmanagement extends AppCompatActivity {
             if (resultCode == RESULT_UPDATE_STUDENT) {
                 Student newStudent = (Student) data.getExtras().get("ObjectStudent");
                 int indexOfStudent = (int) data.getExtras().get("indexOfStudent");
-                listSt.set(indexOfStudent, newStudent);
+//                listSt.set(indexOfStudent, newStudent);
                 db.updateStudent(newStudent);
                 setupRecycleView();
                 Intent intent = new Intent();
@@ -221,7 +224,7 @@ public class Studentmanagement extends AppCompatActivity {
             if (resultCode == RESULT_DELETE_STUDENT) {
                 String idStudent = data.getStringExtra("IDStudent");
                 int indexOfStudent = (int) data.getExtras().get("indexOfStudent");
-                listSt.remove(indexOfStudent);
+//                listSt.remove(indexOfStudent);
                 db.deleteStudent(idStudent);
                 setupRecycleView();
                 Intent intent1 = new Intent();

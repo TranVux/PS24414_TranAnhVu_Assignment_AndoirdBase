@@ -74,6 +74,10 @@ public class ClassDAO {
         db.delete("student", "id_student = ?", new String[]{id});
     }
 
+    public void deleteStudent1(String id){
+        db.delete("student", "id_class =?", new String[]{id});
+    }
+
     public void deleteClass(String _id){
         db.delete("class", "id_class = ?", new String[]{_id});
     }

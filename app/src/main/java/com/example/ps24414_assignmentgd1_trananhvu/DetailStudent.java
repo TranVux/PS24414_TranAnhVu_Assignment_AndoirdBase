@@ -31,6 +31,8 @@ public class DetailStudent extends AppCompatActivity {
     int indexOfStudent;
     ArrayList<ClassSt> listClass;
     ClassSt[] currentClass = new ClassSt[1];
+    Student student;
+    int indexOfClass;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +52,8 @@ public class DetailStudent extends AppCompatActivity {
         }
         listClass = (ArrayList<ClassSt>) data.get("listClass");
         Log.d("TAGCheck", "onCreate: " + listClass.get(0).getClassName());
-        Student student = (Student) data.get("ObjectStudent");
+        student = (Student) data.get("ObjectStudent");
+        getIDClass();
         indexOfStudent = (int) data.get("indexOfStudent");
         txtID.setText(student.getId());
         txtName.setText(student.getName());
@@ -59,6 +62,7 @@ public class DetailStudent extends AppCompatActivity {
         CategoryAdapterStudentDetail categoryAdapter = new CategoryAdapterStudentDetail(this, R.layout.category_spinner_detailstudent, getListClassId());
         spinnerClassName = findViewById(R.id.spinerClassname);
         spinnerClassName.setAdapter(categoryAdapter);
+        spinnerClassName.setSelection(indexOfClass);
         spinnerClassName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -101,6 +105,15 @@ public class DetailStudent extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void getIDClass(){
+        for(ClassSt classSt : listClass){
+            if (classSt.getId().equals(student.getClassID())){
+                indexOfClass = listClass.indexOf(classSt);
+                break;
+            }
+        }
     }
 
     public ArrayList<Category> getListClassId() {

@@ -46,8 +46,8 @@ public class Classmanagement extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.classmanagement);
-        listSt = (ArrayList<Student>) getIntent().getExtras().get("listStudent");
-        listClass = (ArrayList<ClassSt>) getIntent().getExtras().get("listClass");
+//        listSt = (ArrayList<Student>) getIntent().getExtras().get("listStudent");
+//        listClass = (ArrayList<ClassSt>) getIntent().getExtras().get("listClass");
         db = new ClassDAO(Classmanagement.this);
         recyclerViewClass = findViewById(R.id.listClass_new);
         setUpRecycleView();
@@ -64,6 +64,8 @@ public class Classmanagement extends AppCompatActivity {
     }
 
     public void setUpRecycleView() {
+        listClass = db.getListClass();
+        listSt = db.getListStudent();
         adapter = new clAdapter(listClass, new onItemClassClicked() {
             @Override
             public void onItemClassClicked(ClassSt classSt) {
@@ -123,12 +125,12 @@ public class Classmanagement extends AppCompatActivity {
                 if(!check(inputIdClass))return;
                 ClassSt newClass = new ClassSt(inputIdClass.getText().toString(), inputClassName.getText().toString());
                 Toast.makeText(Classmanagement.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
-                listClass.add(newClass);
-                setUpRecycleView();
-                dialogAddClass.dismiss();
+//                listClass.add(newClass);
                 db.AddClass(newClass);
+                setUpRecycleView();
                 Intent daIntent = new Intent();
                 setResult(RESULT_ADD_CLASS, daIntent);
+                dialogAddClass.dismiss();
             }
         });
 
@@ -159,9 +161,9 @@ public class Classmanagement extends AppCompatActivity {
             if (resultCode == RESULT_UPDATE_CLASS) {
                 int indexOfClass = (int) data.getExtras().get("indexOfClass");
                 ClassSt classSt = (ClassSt) data.getExtras().get("ObjectClass");
-                listClass.set(indexOfClass, classSt);
-                setUpRecycleView();
+//                listClass.set(indexOfClass, classSt);
                 db.updateClass(classSt);
+                setUpRecycleView();
                 Intent daIntent = new Intent();
                 setResult(RESULT_UPDATE_CLASS, daIntent);
             }
@@ -169,11 +171,11 @@ public class Classmanagement extends AppCompatActivity {
                 int indexOfClass = (int) data.getExtras().get("indexOfClass");
                 Log.d("indexOfClass", "onActivityResult: "  + indexOfClass);
                 String idClass = (String) data.getExtras().get("idClass");
-                listClass.remove(indexOfClass);
-                setUpRecycleView();
                 db.deleteClass(idClass);
+                db.deleteStudent1(idClass);
+                setUpRecycleView();
                 Intent daIntent = new Intent();
-                setResult(RESULT_UPDATE_CLASS, daIntent);
+                setResult(RESULT_DELETE_CLASS, daIntent);
             }
         }
     }
